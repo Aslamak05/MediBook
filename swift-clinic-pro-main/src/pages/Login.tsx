@@ -59,14 +59,8 @@ export default function Login() {
           </form>
 
           <div className="mt-6 rounded-lg border bg-muted/40 p-3 text-xs">
-            <div className="font-semibold">Quick demo logins</div>
+            <div className="font-semibold">Quick demo login</div>
             <div className="mt-2 grid gap-2">
-              <button type="button" className="text-left hover:underline" onClick={() => fill("patient@demo.com", "Demo@123")}>
-                Patient — patient@demo.com
-              </button>
-              <button type="button" className="text-left hover:underline" onClick={() => fill("doctor@demo.com", "Demo@123")}>
-                Doctor — doctor@demo.com
-              </button>
               <button type="button" className="text-left hover:underline" onClick={() => fill("admin@demo.com", "Demo@123")}>
                 Admin — admin@demo.com
               </button>
