@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+// Database connection setup for MongoDB Atlas
 export async function connectDB() {
   try {
     const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost:27017/medibook';
