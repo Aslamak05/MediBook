@@ -1,4 +1,4 @@
-# Swift Clinic Pro 🏥
+# MediBook 🏥
 
 A comprehensive clinic management system built with modern web technologies. Manage appointments, doctors, prescriptions, and patient records efficiently.
 
