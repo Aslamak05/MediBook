@@ -2,19 +2,26 @@
 FROM node:22-alpine
 
 # Set working directory
-WORKDIR /app
-
-# Copy entire project
-COPY . .
-
-# Change to backend directory and install dependencies
 WORKDIR /app/backend
 
+# Copy backend files
+COPY backend/package*.json ./
+
 # Install dependencies
-RUN npm install
+RUN npm ci --only=production
+
+# Copy backend source code
+COPY backend/src ./src
+
+# Create uploads directory
+RUN mkdir -p uploads
 
 # Expose port
 EXPOSE 4000
 
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD node -e "require('http').get('http://localhost:4000/health', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"
+
 # Start the application
-CMD ["npm", "start"]
+CMD ["node", "src/server.js"]
