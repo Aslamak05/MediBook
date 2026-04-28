@@ -93,7 +93,7 @@ export function SlotManager({
             <ul className="divide-y">
               {upcoming.map((s) => (
                 <li key={s.id} className="flex items-center justify-between gap-3 px-3 py-2 text-sm">
-                  <span>{format(new Date(s.startsAt), "EEE d MMM, h:mm a")}</span>
+                  <span>{format(new Date(s.startsAt), "EEE d MMM, h:mm a")} - {format(new Date(s.endsAt), "h:mm a")}</span>
                   <div className="flex items-center gap-2">
                     {s.isBooked ? (
                       <Badge variant="secondary">Booked</Badge>
