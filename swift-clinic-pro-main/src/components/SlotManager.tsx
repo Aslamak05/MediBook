@@ -23,8 +23,30 @@ export function SlotManager({
   const [slots, setSlots] = useState<Slot[]>([]);
   const [date, setDate] = useState<string>(format(new Date(), "yyyy-MM-dd"));
   const [start, setStart] = useState("10:00");
+  const [end, setEnd] = useState("10:30");
   const [duration, setDuration] = useState(30);
   const [count, setCount] = useState(4);
+
+  // Calculate end time when start or duration changes
+  const updateEndTime = (startTime: string, dur: number) => {
+    const [h, m] = startTime.split(":").map(Number);
+    const totalMinutes = h * 60 + m + dur;
+    const endHour = Math.floor(totalMinutes / 60);
+    const endMin = totalMinutes % 60;
+    setEnd(`${String(endHour).padStart(2, "0")}:${String(endMin).padStart(2, "0")}`);
+  };
+
+  // Update end time when start time changes
+  const handleStartChange = (newStart: string) => {
+    setStart(newStart);
+    updateEndTime(newStart, duration);
+  };
+
+  // Update end time when duration changes
+  const handleDurationChange = (newDuration: number) => {
+    setDuration(newDuration);
+    updateEndTime(start, newDuration);
+  };
 
   const load = async () => {
     if (!doctorId) return;
@@ -64,24 +86,28 @@ export function SlotManager({
           <DialogDescription>Generate consecutive slots, then publish them to patients.</DialogDescription>
         </DialogHeader>
 
-        <div className="grid gap-3 rounded-lg border p-4 sm:grid-cols-4">
+        <div className="grid gap-3 rounded-lg border p-4 sm:grid-cols-5">
           <div className="space-y-1.5">
             <Label>Date</Label>
             <Input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
           </div>
           <div className="space-y-1.5">
             <Label>Start time</Label>
-            <Input type="time" value={start} onChange={(e) => setStart(e.target.value)} />
+            <Input type="time" value={start} onChange={(e) => handleStartChange(e.target.value)} />
           </div>
           <div className="space-y-1.5">
             <Label>Duration (min)</Label>
-            <Input type="number" min={10} step={5} value={duration} onChange={(e) => setDuration(Number(e.target.value))} />
+            <Input type="number" min={10} step={5} value={duration} onChange={(e) => handleDurationChange(Number(e.target.value))} />
+          </div>
+          <div className="space-y-1.5">
+            <Label>End time</Label>
+            <Input type="time" value={end} onChange={(e) => setEnd(e.target.value)} disabled className="bg-muted" />
           </div>
           <div className="space-y-1.5">
             <Label>How many</Label>
             <Input type="number" min={1} max={20} value={count} onChange={(e) => setCount(Number(e.target.value))} />
           </div>
-          <div className="sm:col-span-4">
+          <div className="sm:col-span-5">
             <Button onClick={add} className="w-full sm:w-auto"><Plus className="mr-1 h-4 w-4" /> Add slots</Button>
           </div>
         </div>
