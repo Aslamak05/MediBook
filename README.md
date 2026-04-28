@@ -2,8 +2,8 @@
 
 A comprehensive clinic management system built with modern web technologies. Manage appointments, doctors, prescriptions, and patient records efficiently.
 
-**Live Demo**: Coming Soon (Deploy to Production)  
-**GitHub**: https://github.com/Aslamak05/swift-clinic-pro
+**Live Demo**: https://medi-book-pi.vercel.app/
+**GitHub**: https://github.com/Aslamak05/MediBook
 
 ---
 
@@ -57,7 +57,7 @@ A comprehensive clinic management system built with modern web technologies. Man
 - **Database**: MongoDB with Mongoose ODM
 - **Authentication**: JWT (HS256)
 - **Password Hashing**: bcryptjs
-- **Notifications**: Twilio SMS, In-app notifications
+- **Notifications**: In-app notifications
 - **File Upload**: Multer
 - **Job Scheduling**: node-cron
 - **Environment**: Node.js v22+
